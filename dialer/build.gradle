@@ -1,0 +1,73 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
+
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+
+    defaultConfig {
+        applicationId "com.kinstalk.her.dialer"
+        minSdkVersion 22
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:26.0.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation 'com.android.support:cardview-v7:26.0.0'
+    implementation project(':contactscommon')
+    implementation project(':phonecommon')
+    compile project(path: ':common')
+    compileOnly 'com.kinstalk.common:kinstalk-common:+'
+    implementation 'com.android.support:recyclerview-v7:26.0.0'
+    implementation 'com.android.support:support-v13:26.0.0'
+    implementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation 'com.android.support:design:26.0.0'
+    implementation 'com.googlecode.libphonenumber:libphonenumber:8.9.13'
+    implementation 'com.googlecode.libphonenumber:geocoder:2.102'
+    api 'com.google.guava:guava:26.0-android'
+    //for voip
+    compile 'com.alibaba:fastjson:1.2.14'
+    compile 'log4j:log4j:1.2.17'
+    compile 'com.loopj.android:android-async-http:1.4.8'
+    implementation(name: 'voip', ext: 'aar')
+    //implementation(name: 'openqlibrary', ext: 'aar')
+    // Okhttp3
+    api "com.squareup.okhttp3:okhttp:$rootProject.okhttp3Version"
+    api "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttp3LoggingVersion"
+    implementation project(':incallui')
+    compile 'com.android.support:multidex:1.0.1'
+    // TinyPinyin核心包，约80KB
+    compile 'com.github.promeg:tinypinyin:2.0.3'
+    //multi pinyin
+    implementation files('libs/pinyin4j-2.5.0.jar')
+}
